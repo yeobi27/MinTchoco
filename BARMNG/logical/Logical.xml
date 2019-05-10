@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="78FDCAF0-09C5-4CF7-6A0B-8AF696543ED5" mainViewID="4D4FD7FA-C429-BB07-21CF-682E7C5BB4F4">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:17:00 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

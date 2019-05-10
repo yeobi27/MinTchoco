@@ -1,0 +1,83 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="54F998DF-8769-8EDF-D144-10A5409E48ED" name="supplier">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:08:18 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<ordsAlias>table_11</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="supno" id="651D337B-47F9-D857-DB0F-65D25DCEBBB5">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:09:01 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="supname" id="2ED52FB9-40D5-6DEA-8C5C-18BF41EFE9D4">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:09:01 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="mng" id="560AAEA5-7899-FB09-B220-7742327E6825">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:09:49 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tel" id="6635BDA1-0B22-C5A9-4CED-48F9DD271034">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:10:25 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="suploc" id="B52CE4F1-2436-25ED-3D87-8A8FE5BF7711">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:11:08 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="suplink" id="53BA8735-63CC-73D9-4ABF-8C4790701AEE">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:14:35 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

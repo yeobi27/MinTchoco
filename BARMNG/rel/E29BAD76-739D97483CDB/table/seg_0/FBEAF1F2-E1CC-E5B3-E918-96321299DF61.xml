@@ -1,0 +1,69 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FBEAF1F2-E1CC-E5B3-E918-96321299DF61" name="payment">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:29:15 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<ordsAlias>table_8</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="cardYN" id="2DED71B7-B7BA-F3EB-F9EF-8AC9C12FE89A">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:33:31 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT034</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cardlist" id="95EC1399-6DE2-BDD7-3ECB-9C870921944F">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:36:37 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="received_amo" id="8E3C9B44-E07E-ACE4-560D-079F4034F66A">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:33:31 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="to_rec_amo" id="56077CC0-A265-6E42-D1AB-4B45BB8847D9">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:33:31 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="installment" id="AC5E550C-45D6-118B-089D-DC61989DACDB">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:39:33 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

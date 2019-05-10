@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="BARMNG" id="B83FA624-1161-BFBC-0318-29BF099158B0" version="3.5">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:17:00 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>B83FA624-1161-BFBC-0318-29BF099158B0</designId>
+</OSDM_Design>

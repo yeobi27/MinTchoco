@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6AD9D615-99AD-0164-724A-18B778ACD855" name="b_stock">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:43:14 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<ordsAlias>table_10</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="pno" id="59AD4AF1-335E-FF3D-41CD-6C42DD5845A5">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:44:35 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E3BB3575-DCD9-BB07-F638-CBBE896BB7AC" referredColumn="767925B6-9261-15F9-2999-E33C3726B210"/>
+</associations>
+</Column>
+<Column name="pname" id="7D267C41-84F3-E1A5-8C73-ADE832B0BD0B">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:44:35 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="inven" id="CD78875E-E8C1-4430-258D-F9CA6F561B8F">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:44:35 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="exp_date" id="40756302-32C5-6C5C-BD35-B6D99474D7F5">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:53:06 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="restck_date" id="1EEA25F9-797E-D9A0-BC7C-DF88C1340D40">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:55:53 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="075E5899-516E-3103-BC0C-7AC0A07DF307" name="b_stock_pname_UN">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:19:15 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7D267C41-84F3-E1A5-8C73-ADE832B0BD0B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="82FF34C4-8039-F5EF-5EFE-500317E7158E" name="b_stck_prod_FK">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:15:55 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="59AD4AF1-335E-FF3D-41CD-6C42DD5845A5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

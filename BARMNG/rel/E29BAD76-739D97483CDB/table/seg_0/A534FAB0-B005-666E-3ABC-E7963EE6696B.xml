@@ -1,0 +1,103 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A534FAB0-B005-666E-3ABC-E7963EE6696B" name="b_product">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:23:05 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="pno" id="767925B6-9261-15F9-2999-E33C3726B210">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:37:21 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pname" id="275A29EF-A307-514B-E291-DD81B495B577">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:39:48 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="price" id="F76221DE-4637-1650-22E6-C57C98A62E55">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:40:48 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="category" id="F5D91D74-B997-271A-450B-9DBE9387530E">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:05:20 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="detail" id="55A8E86A-A3C3-2474-26AC-20C35E82A8D5">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:02:36 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>128</dataTypeSize>
+<ownDataTypeParameters>128,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="image" id="AF07B87C-E937-FAF4-1616-9D27A4F55E24">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:48:00 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="193DB389-BFE4-FCD8-CA84-D8B8920A0D86" name="b_product_PK">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 16:40:22 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="767925B6-9261-15F9-2999-E33C3726B210"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="351682DE-294A-E6C2-49C5-243FED1A773C" name="b_prod_pname_UN">
+<createdBy>KKIMSSI</createdBy>
+<createdTime>2019-05-10 17:19:51 UTC</createdTime>
+<ownerDesignName>BARMNG</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="275A29EF-A307-514B-E291-DD81B495B577"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
