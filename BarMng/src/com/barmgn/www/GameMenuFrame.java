@@ -55,12 +55,12 @@ public class GameMenuFrame extends JFrame {
 		p1.setPreferredSize(new Dimension(480, 20));
 		contentPane.add(p1);
 		
-		JButton btnBefore = new JButton("?† ?´? „?œ¼ë¡?");
+		JButton btnBefore = new JButton("ì´ì „ìœ¼ë¡œ");
 		btnBefore.setMargin(new Insets(2, 10, 2, 10));
 		btnBefore.setPreferredSize(new Dimension(100, 15));
 		p1.add(btnBefore);
 			
-		JButton btncall = new JButton("?˜¸ì¶œí•˜ê¸?");
+		JButton btncall = new JButton("í˜¸ì¶œí•˜ê¸°");
 		btncall.setAlignmentY(0.0f);
 		btncall.setPreferredSize(new Dimension(100, 15));
 		p1.add(btncall);
@@ -77,17 +77,17 @@ public class GameMenuFrame extends JFrame {
 		contentPane.add(pn);
 		pn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnNewButton_1 = new JButton("?…Œ?´ë¸”ë?? „");
+		JButton btnNewButton_1 = new JButton("í…Œì´ë¸”ëŒ€ì „");
 		pn.add(btnNewButton_1);
 		btnNewButton_1.setMargin(new Insets(5, 20, 5, 20));
 		btnNewButton_1.setPreferredSize(new Dimension(110, 200));
 		
-		JButton btnNewButton_2 = new JButton("ëª¨ë‘?˜?–‰?š´");
+		JButton btnNewButton_2 = new JButton("ëŸ¬ì‹œì•ˆë£°ë ›");
 		pn.add(btnNewButton_2);
 		btnNewButton_2.setMargin(new Insets(5, 20, 5, 20));
 		btnNewButton_2.setPreferredSize(new Dimension(110, 200));
 		
-		JButton btnNewButton = new JButton("ë³µë¶ˆë³µê²Œ?„");
+		JButton btnNewButton = new JButton("ë³µë¶ˆë³µê²Œì„");
 		pn.add(btnNewButton);
 		btnNewButton.setPreferredSize(new Dimension(110, 200));
 		btnNewButton.setMargin(new Insets(5, 20, 5, 20));
@@ -96,20 +96,38 @@ public class GameMenuFrame extends JFrame {
 		contentPane.add(ps);
 		ps.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JButton btnchoice = new JButton("?„ ?ƒ?™„ë£?");
+		JButton btnchoice = new JButton("ì„ íƒì™„ë£Œ");
 		btnchoice.setPreferredSize(new Dimension(640, 40));
 		ps.add(btnchoice);
 		
 		//frame.setVisible(true);
 		
-		btnBefore.addActionListener(new ActionListener() {
+		
+//		btnBefore.addActionListener(
+	}
+	
+	class SelectedGameListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			String g_cmd = arg0.getActionCommand();
 			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				fr.setVisible(true); //ë©”ì¸?”„? ˆ?„ ?†Œ?™˜	
+			switch(g_cmd)
+			{
+			case "í…Œì´ë¸”ëŒ€ì „":
+				break;
+			case "ëŸ¬ì‹œì•—ë£°ë ›":
+				break;
+			case "ë³µë¶ˆë³µê²Œì„":
+//				setVisible(false);
+//				new Roulette();
+				break;
 			}
-		});
+		
+			
+			
+		}
 	}
 	
 	

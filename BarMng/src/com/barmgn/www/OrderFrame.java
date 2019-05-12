@@ -362,7 +362,7 @@ public class OrderFrame extends JFrame {
 			
 			switch(o_cmd)
 			{
-			case "ÀÌÀü":
+			case "ì´ì „":
 				setVisible(false);
 				mainFrame.setVisible(true);
 				break;
