@@ -4,15 +4,27 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -26,9 +38,27 @@ public class OrderFrame extends JFrame {
    boolean orderlist_flag = false;
    JLabel lblOrderNum; 
    MainFrame mainFrame;
-   int s_ChangeNum = 0;
-   int order = 0;
+   // Label Num
+   int lblcntNum = 0;
+   // 주문 횟수
+   int ordnum = 1;
+   // Table Number : 전역으로 고정
+   int tno = (int)(Math.random()*24)+1;
    private JTextArea ta_totBill;
+   ArrayList<String> BufferedList;
+   HashMap<String, Integer> hmap_OrderNum;
+   private JPanel p_Num;
+   private JPanel p_OrderCart;
+   private JTextArea ta_totCost;
+   private JButton btnPlus;
+   private JButton btnMinus;
+   private JButton btnOrder;
+   private JButton btnOrderCancel;
+   BufferedImage myImage;
+   
+   ImageIcon One_BG = new ImageIcon("images/One_BG.jpg");
+   ImageIcon Bill = new ImageIcon("images/Bill.png");
+   ImageIcon menubar = new ImageIcon("images/menubar.jpg");
    
    public void setOrderFrame(OrderFrame orderFrame)
    {
@@ -50,19 +80,69 @@ public class OrderFrame extends JFrame {
       });
    }
 
+//   class ImagePanel extends JComponent {
+//	   // Show Background image
+////	   private Image back;
+////
+////	   public ImagePanel(Image back) {
+////	      this.back = back;
+////	      this.setLayout(null);
+////	   }
+//	   protected void paintComponent(Graphics g) {
+//	      super.paintComponents(g); 
+//	      System.out.println("왜안나와");
+//	      setOpaque(false);
+//	      g.drawImage(One_BG.getImage(), 0, 0, this); // toy location
+//	      g.drawImage(Bill.getImage(), 334, 10, this); // toy location
+//	      g.drawImage(menubar.getImage(), 12, 10, this); // toy location
+//	   }
+//	}
    /**
     * Create the frame.
     */
    public OrderFrame(MainFrame mainFrame) {
       this.mainFrame = mainFrame;
-      setBounds(new Rectangle(100, 100, 480, 360));
+      BufferedList = new ArrayList<>();
+      hmap_OrderNum = new HashMap<>();
+      setBounds(new Rectangle(100, 100, 800, 600));
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setBounds(100, 100, 480, 360);
-   
-      contentPane = new JPanel();
+      setBounds(100, 100, 800, 600);
+      
+//      icon = new ImageIcon("images/One_BG.jpg");
+      
+      contentPane = new JPanel() {
+   	   	public void paintComponent(Graphics g) {
+ 	      super.paintComponents(g); 
+ 	      System.out.println("왜안나와");
+ 	      setOpaque(false);
+ 	      g.drawImage(One_BG.getImage(), 0, 0, this); // toy location
+ 	      g.drawImage(Bill.getImage(), 334, 10, this); // toy location
+ 	      g.drawImage(menubar.getImage(), 12, 10, this); // toy location
+ 	   }
+      };
+      
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       setContentPane(contentPane);
       contentPane.setLayout(null);
+      // 생성자에 ico 호출 하고 이미지 경로 지정...(상대경로로 안될경우 절대경로 지정)
+//      icon = new ImageIcon("C:\\ddddd.JPG");
+
+//      // 백그라운드 이미지 삽입할 메소드에 이름없는 클래스로 구현
+//      JPanel panel = new JPanel() {
+//       public void paintComponent(Graphics g) {
+//        // Approach 1: Dispaly image at at full size
+//        g.drawImage(icon.getImage(), 0, 0, null);
+//        // Approach 2: Scale image to size of component
+//        // Dimension d = getSize();
+//        // g.drawImage(icon.getImage(), 0, 0, d.width, d.height, null);
+//        // Approach 3: Fix the image position in the scroll pane
+//        // Point p = scrollPane.getViewport().getViewPosition();
+//        // g.drawImage(icon.getImage(), p.x, p.y, null);
+//        setOpaque(false);
+//        super.paintComponent(g);
+//       }
+//      };
+//      icon = new ImageIcon("images/menubar.jpg");
       
       JPanel p_Tab = new JPanel();
       p_Tab.setBounds(12, 10, 320, 42);
@@ -224,36 +304,42 @@ public class OrderFrame extends JFrame {
       p_CardLayout.add("inAlcoholPanel",p_inAlcohol);
       
       JButton btnBrotherSoju = new JButton("부라더소주");
+      btnBrotherSoju.setIcon(new ImageIcon("C:\\Java\\Workspace\\BarMng\\images\\brothersoju.png"));
       btnBrotherSoju.setPreferredSize(new Dimension(105, 50));
       p_inAlcohol.add(btnBrotherSoju);
       
       btnBrotherSoju.addActionListener(l);
       
       JButton btnSunhariApp = new JButton("순하리(사과)");
+      btnSunhariApp.setIcon(new ImageIcon("C:\\Java\\Workspace\\BarMng\\images\\pureapple.png"));
       btnSunhariApp.setPreferredSize(new Dimension(105, 50));
       p_inAlcohol.add(btnSunhariApp);
       
       btnSunhariApp.addActionListener(l);
       
       JButton btnCharmSoju = new JButton("참이슬");
+      btnCharmSoju.setIcon(new ImageIcon("C:\\Java\\Workspace\\BarMng\\images\\truedew.png"));
       btnCharmSoju.setPreferredSize(new Dimension(105, 50));
       p_inAlcohol.add(btnCharmSoju);
       
       btnCharmSoju.addActionListener(l);
       
       JButton btnAsFirst = new JButton("처음처럼");
+      btnAsFirst.setIcon(new ImageIcon("C:\\Java\\Workspace\\BarMng\\images\\first.png"));
       btnAsFirst.setPreferredSize(new Dimension(105, 50));
       p_inAlcohol.add(btnAsFirst);
       
       btnAsFirst.addActionListener(l);
       
       JButton btmCharmJamong = new JButton("참이슬(자몽)");
+      btmCharmJamong.setIcon(new ImageIcon("C:\\Java\\Workspace\\BarMng\\images\\truedewgf.png"));
       btmCharmJamong.setPreferredSize(new Dimension(105, 50));
       p_inAlcohol.add(btmCharmJamong);
       
       btmCharmJamong.addActionListener(l);
       
       JButton btnSunhariBok = new JButton("순하리(복분자)");
+      btnSunhariBok.setIcon(new ImageIcon("C:\\Java\\Workspace\\BarMng\\images\\firstpeach.png"));
       btnSunhariBok.setPreferredSize(new Dimension(105, 50));
       p_inAlcohol.add(btnSunhariBok);
       
@@ -721,7 +807,7 @@ public class OrderFrame extends JFrame {
       
       btnJJolMen.addActionListener(l);
       
-      JPanel p_Num = new JPanel();
+      p_Num = new JPanel();
       p_Num.setLayout(null);
       p_Num.setPreferredSize(new Dimension(300, 35));
       p_Num.setBounds(2, 230, 332, 35);
@@ -731,47 +817,62 @@ public class OrderFrame extends JFrame {
       lbldisplayOrderNum.setBounds(12, 10, 32, 15);
       p_Num.add(lbldisplayOrderNum);
       
-      lblOrderNum = new JLabel("n");
+      lblOrderNum = new JLabel("0");
       lblOrderNum.setBounds(49, 10, 7, 15);
       p_Num.add(lblOrderNum);
       
-      JButton btnPlus = new JButton("+");
+      btnPlus = new JButton("+");
       btnPlus.setPreferredSize(new Dimension(40, 23));
       btnPlus.setBounds(120, 6, 40, 23);
       p_Num.add(btnPlus);
       
-      JButton btnMinus = new JButton("-");
+      btnPlus.addActionListener(l);
+      
+      btnMinus = new JButton("-");
       btnMinus.setPreferredSize(new Dimension(40, 23));
       btnMinus.setBounds(176, 6, 40, 23);
       p_Num.add(btnMinus);
+      
+      btnMinus.addActionListener(l);
+      
+//      icon1 = new ImageIcon("images/Bill.png");
       
       JPanel p_Payment = new JPanel();
       p_Payment.setBounds(334, 10, 130, 300);
       p_Payment.setPreferredSize(new Dimension(130, 300));
       contentPane.add(p_Payment);
+      p_Payment.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
       
-      JLabel lblOrderCart = new JLabel("주문계산서");
+      JLabel lblOrderCart = new JLabel();
       p_Payment.add(lblOrderCart);
       
-      ta_totBill = new JTextArea();
-      ta_totBill.setRows(10);
-      ta_totBill.setColumns(16);
-      p_Payment.add(ta_totBill);
+      JScrollPane scrollPane = new JScrollPane();
+      p_Payment.add(scrollPane);
       
-      JTextArea ta_totCost = new JTextArea();
-      ta_totCost.setColumns(16);
+      ta_totBill = new JTextArea();
+      scrollPane.setViewportView(ta_totBill);
+      ta_totBill.setRows(10);
+      ta_totBill.setColumns(12);
+      
+      ta_totCost = new JTextArea();
+      ta_totCost.setColumns(12);
       p_Payment.add(ta_totCost);
       
-      JButton btnOrder = new JButton("\uC8FC\uBB38");
+      btnOrder = new JButton("\uC8FC\uBB38");
       btnOrder.setPreferredSize(new Dimension(60, 23));
       p_Payment.add(btnOrder);
       
-      JButton btnOrderCancel = new JButton("\uC0AD\uC81C");
+      btnOrder.addActionListener(l);
+      
+      btnOrderCancel = new JButton("\uC0AD\uC81C");
       btnOrderCancel.setPreferredSize(new Dimension(60, 23));
       p_Payment.add(btnOrderCancel);
       
-      JPanel p_OrderCart = new JPanel();
-      p_OrderCart.setBounds(2, 268, 332, 42);
+      btnOrderCancel.addActionListener(l);
+      
+      p_OrderCart = new JPanel();
+      p_OrderCart.setPreferredSize(new Dimension(300, 35));
+      p_OrderCart.setBounds(2, 268, 330, 42);
       contentPane.add(p_OrderCart);
       p_OrderCart.setLayout(null);
       
@@ -789,16 +890,41 @@ public class OrderFrame extends JFrame {
       
       setVisible(true);
       
+//      //Call Background image
+//      myImage = null;
+//      try {
+//         myImage = ImageIO.read(new File("images/One_BG.jpg"));
+//      } catch (IOException e1) {
+//         e1.printStackTrace();
+//      }
+      
+//      ImagePanel pn = new ImagePanel(myImage);   
+//      contentPane.add(pn);
+      
       btnInputTextArea.addActionListener(l);
       
+      p_Num.setVisible(false);
+      p_OrderCart.setVisible(false);
    }
    
    public void changePanel(String sChangePanel) 
    {
       if(sChangePanel.equals("OrderListPanel"))
       {
+    	  lblcntNum=0;
+    	  
          orderlist_flag = true;
          cards.show(p_CardLayout, "OrderListPanel");
+         
+         BufferedList.clear();
+         hmap_OrderNum.clear();
+         
+         // p_Num
+         // p_OrderCart
+         // 가 안보이게
+         p_Num.setVisible(false);
+         p_OrderCart.setVisible(false);
+         
          revalidate();
          repaint();
       }
@@ -915,57 +1041,94 @@ public class OrderFrame extends JFrame {
             }
             else
             {
-               changePanel("OrderListPanel");
+            	// HashMap
+            	// Buffered 는 비워줘야함
+            	changePanel("OrderListPanel");
+           	 	BufferedList.clear();
+           	 	hmap_OrderNum.clear();
+           	 	lblOrderNum.setText("0");
             }
             break;
             // Card Panel
          case "술":
             changePanel("inAlcoholPanel");
+            p_Num.setVisible(true);
+            p_OrderCart.setVisible(true);
             break;
          case "안주":
             changePanel("inSaladPanel");
+            p_Num.setVisible(true);
+            p_OrderCart.setVisible(true);
             break;
          case "음료/식사":
-            changePanel("inDrinknPanel");
+            changePanel("inDrinkPanel");
+            p_Num.setVisible(true);
+            p_OrderCart.setVisible(true);
             break;
          case "소주/전통주":
              changePanel("inAlcoholPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "생맥주":
              changePanel("inLiveBeerPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "병맥주":
              changePanel("inBottleBeerPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "생과일주":
              changePanel("inFruitAlcoholPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "샐러드":
              changePanel("inSaladPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "치즈류":
              changePanel("inCheesePanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "일품요리류":
              changePanel("inBestPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "볶음류":
              changePanel("inRoastingPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "탕류":
              changePanel("inSoupPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "음료":
              changePanel("inDrinkPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "셀프메뉴":
              changePanel("inSelfMenuPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "서브메뉴":
              changePanel("inSubMenuPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          case "추가사리":
              changePanel("inAddSariPanel");
+             p_Num.setVisible(true);
+             p_OrderCart.setVisible(true);
              break; 
          // Soju sub List
          case "부라더소주":
@@ -977,9 +1140,38 @@ public class OrderFrame extends JFrame {
          case "참이슬(자몽)":
         	 System.out.println("!!!!!");
         	 // get number
-        	 s_ChangeNum++;
-        	 pi = s_ChangeNum + ""; 
+        	 lblcntNum++;
+        	 pi = lblcntNum + ""; 
         	 lblOrderNum.setText(pi);
+        	 
+    		 if(BufferedList.size() == 0 )
+    		 {
+    			 BufferedList.add("참이슬(자몽)");
+    		 }
+        	 
+        	 // 참 참 일때
+        	 // 들어가있으면 안되게끔
+        	 for(int i = 0 ; i < BufferedList.size() ; i++)
+        	 {
+        		 // 존재하지 않으면 add
+        		 if( !(BufferedList.get(i).equals("참이슬(자몽)")) )
+        		 {
+        			 BufferedList.add("참이슬(자몽)");
+        		 }
+        	 }
+        	 
+        	 // 키를 포함하고있으면 true 리턴
+        	 if(hmap_OrderNum.containsKey("참이슬(자몽)"))
+        	 {
+        		 // 원래 value 에 +1
+        		 int tempNum = hmap_OrderNum.get("참이슬(자몽)");
+        		 hmap_OrderNum.put("참이슬(자몽)", tempNum+1);
+        	 }
+        	 else
+        	 {
+        		 hmap_OrderNum.put("참이슬(자몽)", 1);
+        	 }
+        	 
         	 break;
          case "순하리(복분자)":
         	 break;
@@ -1037,9 +1229,37 @@ public class OrderFrame extends JFrame {
          case "베리베리러블리불닭":
         	 System.out.println("!!!!!");
         	 // get number
-        	 s_ChangeNum++;
-        	 pi = s_ChangeNum + ""; 
+        	 lblcntNum++;
+        	 pi = lblcntNum + ""; 
         	 lblOrderNum.setText(pi);
+
+    		 if(BufferedList.size() == 0 )
+    		 {
+    			 BufferedList.add("베리베리러블리불닭");
+    		 }
+        	 
+        	 // 참 참 일때
+        	 // 들어가있으면 안되게끔
+        	 for(int i = 0 ; i < BufferedList.size() ; i++)
+        	 {
+        		 // 존재하지 않으면 add
+        		 if( !(BufferedList.get(i).equals("베리베리러블리불닭")) )
+        		 {
+        			 BufferedList.add("베리베리러블리불닭");
+        		 }
+        	 }
+        	 // 키를 포함하고있으면 true 리턴
+        	 if(hmap_OrderNum.containsKey("베리베리러블리불닭"))
+        	 {
+        		 // 원래 value 에 +1
+        		 int tempNum = hmap_OrderNum.get("베리베리러블리불닭");
+        		 hmap_OrderNum.put("베리베리러블리불닭", tempNum+1);
+        	 }
+        	 else
+        	 {
+        		 hmap_OrderNum.put("베리베리러블리불닭", 1);
+        	 }
+        	 
         	 break;
          case "불고기피자":
         	 break;
@@ -1074,9 +1294,39 @@ public class OrderFrame extends JFrame {
          case "안심하드라고":
         	 System.out.println("!!!!!");
         	 // get number
-        	 s_ChangeNum++;
-        	 pi = s_ChangeNum + ""; 
+        	 lblcntNum++;
+        	 pi = lblcntNum + "";
+        	 // pi 는 전체갯수
         	 lblOrderNum.setText(pi);
+
+    		 if(BufferedList.size() == 0 )
+    		 {
+    			 BufferedList.add("안심하드라고");
+    		 }
+        	 // 참 참 일때
+        	 // 들어가있으면 안되게끔
+        	 for(int i = 0 ; i < BufferedList.size() ; i++)
+        	 {
+        		 // 존재하지 않으면 add
+        		 if( !(BufferedList.get(i).equals("안심하드라고")) )
+        		 {
+        			 BufferedList.add("안심하드라고");
+        		 }
+        		 
+        	 }
+        	 
+        	 // 키를 포함하고있으면 true 리턴
+        	 if(hmap_OrderNum.containsKey("안심하드라고"))
+        	 {
+        		 // 원래 value 에 +1
+        		 int tempNum = hmap_OrderNum.get("안심하드라고");
+        		 hmap_OrderNum.put("안심하드라고", tempNum+1);
+        	 }
+        	 else
+        	 {
+        		 hmap_OrderNum.put("안심하드라고", 1);
+        	 }
+        	 
         	 break;
          case "힘센삼겹":
         	 break;
@@ -1135,31 +1385,98 @@ public class OrderFrame extends JFrame {
          case "쫄면사리":
         	 break;
          case "주문담기":
-//        	 s_ChangeNum=0;
-//        	order++;
-//        	String c_date = "DEFAULT";
-//        	int tno = (int)(Math.random()*24)+1;
-//        	System.out.println(tno);
-//        	
-//			String name = tfName.getText();
-//			String dept = tfDept.getText();
-//			//DB, ta �߰����¸޼���
-//			StudentInfo s = new StudentInfo(sno, name, dept);
-//			
-//			db.insert(s);
-        	 
-//        	Product prod = new Product();
-        	 
 			ArrayList<Product> list = db.select();
-//			ta.setText("");
-			for( int i = 0 ; i < list.size() ; i++ )
-			{
-				ta_totBill.append(list.get(i).toString()+"\n");
+
+			for( int i = 0 ; i < BufferedList.size() ; i++ )
+			{	
+				
+				for( int j = 0 ; j < list.size() ; j++ )
+				{			
+					StringTokenizer st = new StringTokenizer(list.get(j).toString()," ");
+					// 참참
+					// 안안
+					// 베베
+					// HashMap<String,Int> hmap_OrderNum = new HashMap<>();
+					// 주문완료하면 둘다 비워줘, BufferedList 와 HashMap
+					
+//					for(int n = 0 ; n < 2 ; n++ )
+					while(st.hasMoreTokens())
+					{
+						if(BufferedList.get(i).toString().equals(st.nextToken()))
+						{	
+							System.out.println(list.get(j).toString()+" x"+hmap_OrderNum.get(BufferedList.get(i).toString())+"\n");
+							ta_totBill.append(list.get(j).toString()+" x"+hmap_OrderNum.get(BufferedList.get(i).toString())+"\n");
+							break;
+						}
+					}				
+				}
 			}
+			
+			BufferedList.clear();
+			hmap_OrderNum.clear();
+			lblcntNum=0;
+			lblOrderNum.setText("0");
+			break;
+         case "주문":
+        	StringTokenizer st = new StringTokenizer(ta_totBill.getText()," x\n");
+        	int TokenCnt = 0;
+        	
+        	String BufferToken = "";
+        	String NameToken = "";
+        	String PriceToken = "";
+        	String QuantityToken = "";
+        	
+        	while(st.hasMoreTokens())
+        	{
+        		BufferToken = st.nextToken();
+        		TokenCnt++;
+        		
+        		// 이름 토큰
+        		if(TokenCnt%3 == 1)
+        		{
+        			NameToken = BufferToken;
+        		}
+        		
+        		// 가격 토큰
+        		if(TokenCnt%3 == 2)
+        		{
+        			PriceToken = BufferToken;
+        		}
+        		
+        		// 갯수 토큰
+        		if(TokenCnt%3 == 0)
+        		{
+        			// 세번째에 있는 갯수를 토큰으로 가져온다.
+        			QuantityToken = BufferToken;
+        		}
+        		
+        		// 이름, 가격, 갯수가 다 있어야 클래스에 넣을수 있다.
+        		if(TokenCnt%3 == 0)
+        		{
+        			ArrayList<Product> p_list = db.selectPno(NameToken);
+        			int pno = p_list.get(0).getPno();
+        			String pname = NameToken;
+        			int price = Integer.parseInt(PriceToken);
+        			int quantity = Integer.parseInt(QuantityToken);
+        			int tot_sales = price*quantity;
+        			// 이것 내일 해결 하자
+        			Date c_date = Date.valueOf("DEFAULT");
+        			
+        			Order order = new Order(ordnum, tno, pno, pname, price, tot_sales, quantity, c_date);
+        			db.insert(order);
+        		}
+        	}
+        	ordnum++;
+        	ta_totBill.setText("");
+        	 break;
+         case "삭제":
         	 
-        	break;
+        	 break;
+         case "+":
+        	 break;
+         case "-":
+        	 break;
          }
       }
-      
    }
 }
