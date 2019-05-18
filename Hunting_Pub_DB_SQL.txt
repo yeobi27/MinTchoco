@@ -1,0 +1,280 @@
+
+CREATE TABLE b_order (
+    ordnum      NUMBER NOT NULL,
+    c_date      DATE DEFAULT SYSDATE,
+    tno         NUMBER,
+    pno         NUMBER,
+    pname       VARCHAR2(40),
+    price       NUMBER,
+    quantity    NUMBER,
+    tot_sales   NUMBER
+);
+--DROP TABLE b_order;
+--
+ALTER TABLE b_order ADD CONSTRAINT order_pk PRIMARY KEY ( ordnum );
+
+CREATE TABLE b_product (
+    pno        NUMBER NOT NULL,
+    pname      VARCHAR2(40),
+    price      NUMBER,
+    category   VARCHAR2(40),
+    detail     VARCHAR2(128),
+    image      BLOB
+);
+
+ALTER TABLE b_product ADD CONSTRAINT b_product_pk PRIMARY KEY ( pno );
+
+ALTER TABLE b_product ADD CONSTRAINT b_prod_pname_un UNIQUE ( pname );
+
+CREATE TABLE b_stock (
+    pno           NUMBER NOT NULL,
+    pname         VARCHAR2(40),
+    inven         NUMBER,
+    exp_date      DATE DEFAULT SYSDATE,
+    restck_date   DATE DEFAULT SYSDATE
+);
+
+ALTER TABLE b_stock ADD CONSTRAINT b_stock_pname_un UNIQUE ( pname );
+
+CREATE TABLE payment (
+    cardyn          CHAR(1),
+    cardlist        VARCHAR2(40),
+    received_amo    NUMBER,
+    to_rec_amo      NUMBER,
+    installment     NUMBER,
+    tdy_tot_sales   NUMBER
+);
+
+CREATE TABLE supplier (
+    supno     NUMBER,
+    supname   VARCHAR2(30),
+    mng       VARCHAR2(30),
+    tel       VARCHAR2(30),
+    suploc    VARCHAR2(30),
+    suplink   VARCHAR2(30)
+);
+
+ALTER TABLE b_stock
+    ADD CONSTRAINT b_stck_prod_fk FOREIGN KEY ( pno )
+        REFERENCES b_product ( pno );
+
+CREATE SEQUENCE seq_order;
+
+-- Oracle SQL Developer Data Modeler 요약 보고서: 
+-- 
+-- CREATE TABLE                             5
+-- CREATE INDEX                             0
+-- ALTER TABLE                              5
+-- CREATE VIEW                              0
+-- ALTER VIEW                               0
+-- CREATE PACKAGE                           0
+-- CREATE PACKAGE BODY                      0
+-- CREATE PROCEDURE                         0
+-- CREATE FUNCTION                          0
+-- CREATE TRIGGER                           0
+-- ALTER TRIGGER                            0
+-- CREATE COLLECTION TYPE                   0
+-- CREATE STRUCTURED TYPE                   0
+-- CREATE STRUCTURED TYPE BODY              0
+-- CREATE CLUSTER                           0
+-- CREATE CONTEXT                           0
+-- CREATE DATABASE                          0
+-- CREATE DIMENSION                         0
+-- CREATE DIRECTORY                         0
+-- CREATE DISK GROUP                        0
+-- CREATE ROLE                              0
+-- CREATE ROLLBACK SEGMENT                  0
+-- CREATE SEQUENCE                          0
+-- CREATE MATERIALIZED VIEW                 0
+-- CREATE MATERIALIZED VIEW LOG             0
+-- CREATE SYNONYM                           0
+-- CREATE TABLESPACE                        0
+-- CREATE USER                              0
+-- 
+-- DROP TABLESPACE                          0
+-- DROP DATABASE                            0
+-- 
+-- REDACTION POLICY                         0
+-- 
+-- ORDS DROP SCHEMA                         0
+-- ORDS ENABLE SCHEMA                       0
+-- ORDS ENABLE OBJECT                       0
+-- 
+-- ERRORS                                   0
+-- WARNINGS                                 0
+
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (1, '참이슬', 3000, '소주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (2, '파닭', 18000, '일품','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (3, '콜라', 3000, '음료','','');
+--
+----new edit
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (4, '부라더소주', 3500, '소주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (5, '순하리(사과)', 4000, '소주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (6, '처음처럼', 3000, '소주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (7, '참이슬(자몽)', 3500, '소주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (8, '순하리(복분자)', 4500, '소주','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (9, '잉글리쉬에일', 4500, '생맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (10, '레페블론드', 4000, '생맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (11, '골든에일', 4000, '생맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (12, '기네스', 4000, '생맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (13, '칼스버그', 4000, '생맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (14, '발티카', 4500, '생맥','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (15, '하이트', 3500, '병맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (16, '코로나', 4000, '병맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (17, '하이네켄', 4000, '병맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (18, '1664블랑', 4000, '병맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (19, '제주에일', 4500, '병맥','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (20, '호가든', 4500, '병맥','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (21, '생딸기주', 4500, '과주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (22, '생키위주', 4500, '과주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (23, '파인애플주', 4500, '과주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (24, '생사과주', 4500, '과주','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (25, '생오렌지주', 4500, '과주','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (26, '과일퐁듀', 7000, '샐러드','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (27, 'LA떡다져쓰', 7500, '샐러드','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (28, '살아있네살아있어', 8500, '샐러드','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (29, '콩닭콩닭', 7500, '샐러드','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (30, '포토타임', 9000, '샐러드','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (31, '누룽지샐러드', 5000, '샐러드','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (32, '베리베리러블리불닭', 14000, '치즈','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (33, '불고기피자', 11000, '치즈','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (34, '김피탕', 12000, '치즈','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (35, '치즈닭강정', 13000, '치즈','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (36, '크림치즈러브치킨', 14000, '치즈','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (37, '매운꺄르르치킨', 14000, '일품','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (38, '크림속매운닭강정', 15000, '일품','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (39, '푸다닭파다닭', 14000, '일품','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (40, '통큰통닭', 8000, '일품','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (41, 'XO떡볶이', 11000, '일품','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (42, 'L.O.L', 9000, '일품','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (43, '상큼숙취볶음', 8000, '구이','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (44, '오독오돌마요', 8000, '구이','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (45, '모래집볶음', 8000, '구이','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (46, '하노이의아침', 8000, '구이','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (47, '안심하드라고', 8000, '구이','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (48, '정력왕아침', 8000, '구이','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (49, '누룽지탕', 8000, '탕','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (50, '부대찌개', 8000, '탕','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (51, '짱아찌', 8000, '탕','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (52, '우아한갈비찜', 8000, '탕','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (53, '오뎅탕', 8000, '탕','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (54, '짬뽕', 8000, '탕','','');
+--
+----drink, dish
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (55, '사이다', 1500, '음료','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (56, '오렌지주스', 2000, '음료','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (57, '레드불', 2500, '음료','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (58, '토닉워터', 1500, '음료','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (59, '쿨피스', 1500, '음료','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (60, '컨디션', 1500, '셀프메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (61, '수소환원수', 1500, '셀프메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (62, '아메리카노', 2500, '셀프메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (63, '카페라떼', 3500, '셀프메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (64, '소프트아이스크림', 2000, '셀프메뉴','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (65, '다줄게라면', 4000, '서브메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (66, '속타는짜빠게티', 4000, '서브메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (67, '유혹의도시락', 4000, '서브메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (68, '마요주먹밥', 3000, '서브메뉴','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (69, '치즈김치볶음밥', 4000, '서브메뉴','','');
+--
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (70, '라면사리', 2000, '추가사리','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (71, '우동사리', 2000, '추가사리','','');
+--INSERT INTO b_product(pno, pname, price, category, detail, image)
+--VALUES (72, '쫄면사리', 2000, '추가사리','','');
+--
+--
+
+--
+--
+--
+--select * FROM b_product;
+----메뉴
+--select * FROM b_stock;
+----재고
+--select * FROM b_order;
+----오더
+
+
+
+commit;

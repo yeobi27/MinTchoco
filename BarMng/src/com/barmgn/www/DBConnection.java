@@ -20,45 +20,40 @@ public class DBConnection {
 		return db;
 	}
 
-	public Connection getConnection() {
+	private Connection getConnection() {
+		String url = "jdbc:oracle:thin:@localhost:1521:XE";	// url : db����
+		String user = "ksy";	// ����
+		String password = "ksy";
+		String driver = "oracle.jdbc.driver.OracleDriver";
 		Connection conn = null;
+		
 		try {
-			String user = "ksy";
-			String pw = "ksy";
-			String url = "jdbc:oracle:thin:@192.168.0.78:1521:xe";
-			// IP address, port number, DBname (default : orcl)
-
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			// Loading JDBC Driver(ojdbc6.jar)
-			conn = DriverManager.getConnection(url, user, pw);
-
-			System.out.println("Now you connected Db.\n");
-
-		} catch (Exception e) { // Fail Loading
+			// �ݵ�� �ε����
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user, password);
+			
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 		return conn;
 	}
 
 	// Bring data on DB to JAVA
 
-	public ArrayList<Product> select(Product product) {
-		ArrayList<Product> list = new ArrayList<Product>();
+	public ArrayList<Product> select() {
+		ArrayList<Product> list = new ArrayList<>();
 
 		Connection conn = null; // session statement
 		PreparedStatement pstm = null; // sql sentence.
 		// Statement : Sending Interface.
 		// PreparedStatement : Same as Statement. Moving query order.
 		ResultSet rs = null; // receive query data
-
+		String quary = "SELECT * FROM b_product";
+		
 		try {
-			String quary = "SELECT pname, price FROM b_product WHERE pname=? and price=?";
-
 			conn = getConnection(); // Connection Statement
-			pstm = conn.prepareStatement(quary); // Send query for DB
-			pstm.setString(1, product.getPname());	// java > sql �� �Է½� int ������ �ֱ� 
-			pstm.setInt(2, product.getPrice());	// java > sql �� �Է½� String ������ �ֱ�
-			
+			pstm = conn.prepareStatement(quary); // Send query for DB			
 			rs = pstm.executeQuery(); // Result
 
 			while (rs.next()) {
@@ -67,12 +62,12 @@ public class DBConnection {
 				p.setPno(rs.getInt("pno"));
 				p.setPname(rs.getString("pname"));
 				p.setPrice(rs.getInt("price"));
-//            p.setCategory(rs.getString("category"));
-//            p.setDetail(rs.getString("detail"));
-//            p.setImage(rs.getString("image"));
+				p.setCategory(rs.getString("category"));
+				p.setDetail(rs.getString("detail"));
+            	p.setImage(rs.getBlob("image"));
 				list.add(p);
-
 			}
+			
 
 		} catch (SQLException sqle) {
 			System.out.println("no result");
@@ -86,26 +81,68 @@ public class DBConnection {
 		return list;
 	}
 
+	public ArrayList<Product> selectPno(String pname) {
+		ArrayList<Product> list = new ArrayList<>();
+
+		Connection conn = null; // session statement
+		PreparedStatement pstm = null; // sql sentence.
+		// Statement : Sending Interface.
+		// PreparedStatement : Same as Statement. Moving query order.
+		ResultSet rs = null; // receive query data
+		String quary = "SELECT pno FROM b_product WHERE pname=?";
+		
+		try {
+			conn = getConnection(); // Connection Statement
+			pstm = conn.prepareStatement(quary); // Send query for DB			
+			pstm.setString(1, pname);
+			
+			rs = pstm.executeQuery(); // Result
+
+			while (rs.next()) {
+
+				Product p = new Product();
+				p.setPno(rs.getInt("pno"));
+//				p.setPname(rs.getString("pname"));
+//				p.setPrice(rs.getInt("price"));
+//				p.setCategory(rs.getString("category"));
+//				p.setDetail(rs.getString("detail"));
+//            	p.setImage(rs.getBlob("image"));
+				list.add(p);
+			}
+			
+
+		} catch (SQLException sqle) {
+			System.out.println("no result");
+			sqle.printStackTrace();
+
+		} finally {
+			// Close connection
+			dbClose(conn, pstm, rs);
+
+		}
+		return list;
+	}
+	
 	public void insert(Order order) {
 		// �ݵ�� NULL ������ �־�����Ѵ�.
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO b_order VALUES(?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO b_order(ordnum, tno, pno, pname, price, quantity, tot_sales) VALUES(seq_order.nextval,?,?,?,?,?,?)";
 
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, order.getOrdnum()); // java > sql �� �Է½� int ������ �ֱ�
-			ps.setString(2, order.getC_date()); // java > sql �� �Է½� String ������ �ֱ�
-			ps.setInt(3, order.getTno());
-			ps.setInt(4, order.getPno());
-			ps.setString(5, order.getPname());
-			ps.setInt(6, order.getPrice());
-			ps.setInt(7, order.getQuantity());
-			ps.setInt(8, order.getTot_sales());
-
-			int n = ps.executeUpdate(); // n �� �ԷµǴ� ���� ���� �Է��̳� ����, ������ ������ ��ȯ����
-
+//			ps.setInt(1, order.getOrdnum()); // java > sql �� �Է½� int ������ �ֱ�
+//			ps.setDate(2, order.getC_date()); // java > sql �� �Է½� String ������ �ֱ�
+			ps.setInt(1, order.getTno());
+			ps.setInt(2, order.getPno());
+			ps.setString(3, order.getPname());
+			ps.setInt(4, order.getPrice());
+			ps.setInt(5, order.getQuantity());
+			ps.setInt(6, order.getTot_sales());
+			
+			int n = ps.executeUpdate(); 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
